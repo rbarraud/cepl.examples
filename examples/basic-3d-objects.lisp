@@ -15,7 +15,7 @@
 (defun-g b3d-frag ((interp-color :vec4))
   interp-color)
 
-(def-g-> render-widgets ()
+(defpipeline-g render-widgets ()
   (b3d-vert g-pc)
   (b3d-frag :vec4))
 
@@ -80,7 +80,7 @@
 (let ((running nil))
   (defun run-loop ()
     (init)
-    (reshape (current-viewport))
+    (reshape (frame-size *camera*))
     (setf running t)
     (whilst-listening-to ((#'window-size-callback (window 0) :size))
       (loop :while (and running (not (shutting-down-p))) :do
